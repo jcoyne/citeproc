@@ -307,7 +307,7 @@ module CiteProc
     end
 
     def to_s
-      [given, family].compact_join(' ')
+      [given, family, literal].compact_join(' ')
     end
 
     # @return [String] the name formatted according to the current options

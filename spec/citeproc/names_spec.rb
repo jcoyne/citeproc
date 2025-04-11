@@ -13,6 +13,7 @@ module CiteProc
     let(:dostoyevksy) { Name.new(:given => 'Фёдор Михайлович', :family => 'Достоевский') }
     let(:saer_decomposed) { Name.new(:family => 'Saer', :given => 'Juan José') }
     let(:saer_precomposed) { Name.new(:family => 'Saer', :given => 'Juan José') }
+    let(:gnu_linux) { Name.new(literal: 'GNU/Linux') }
 
     let(:utf) { Name.new(
       :given => 'Gérard',
@@ -222,7 +223,7 @@ module CiteProc
       describe 'literals' do
 
         it 'is a literal if the literal attribute is set' do
-          expect(Name.new(:literal => 'GNU/Linux')).to be_literal
+          expect(gnu_linux).to be_literal
         end
 
         it 'is not literal by default' do
@@ -622,6 +623,11 @@ module CiteProc
             expect(gang_of_four.to_s).not_to end_with(', FOO')
           end
 
+        end
+
+        context 'with a literal name' do
+          subject { gnu_linux.to_s }
+          it { is_expected.to eq 'GNU/Linux' }
         end
 
         it 'squeezes multiple whitespace between delimiter and connector' do
